@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Medical Equipment Condition Analyzer</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Medical Equipment Condition Analyzer</h1>
+            <p>Upload a photo of medical equipment to analyze its condition and get purchase recommendations</p>
+        </header>
+
+        <div class="upload-section">
+            <div class="upload-area" id="uploadArea">
+                <input type="file" id="imageInput" accept="image/*" capture="camera" hidden>
+                <div class="upload-content">
+                    <div class="upload-icon">📷</div>
+                    <h3>Click to Capture or Upload Photo</h3>
+                    <p>Supported formats: JPEG, PNG, GIF</p>
+                    <p>Max size: 10MB</p>
+                    <button type="button" onclick="document.getElementById('imageInput').click()">
+                        Choose Image
+                    </button>
+                </div>
+            </div>
+            
+            <div class="preview-section" id="previewSection" style="display: none;">
+                <h3>Image Preview</h3>
+                <img id="imagePreview" alt="Preview">
+                <div class="preview-actions">
+                    <button onclick="analyzeImage()" id="analyzeBtn">Analyze Equipment</button>
+                    <button onclick="resetUpload()" class="secondary">Choose Different Image</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="result-section" id="resultSection" style="display: none;">
+            <h2>Analysis Results</h2>
+            <div class="result-card">
+                <div class="result-header">
+                    <h3 id="equipmentName">Equipment Name</h3>
+                    <span class="condition-badge" id="conditionBadge">Condition</span>
+                </div>
+                
+                <div class="analysis-source" id="analysisSource">
+                    <!-- Analysis source will be displayed here -->
+                </div>
+                
+                <div class="result-details">
+                    <div class="detail-item">
+                        <strong>Condition Description:</strong>
+                        <span id="conditionDescription">-</span>
+                    </div>
+                    <div class="detail-item">
+                        <strong>Confidence Level:</strong>
+                        <span id="confidenceLevel">-</span>
+                    </div>
+                    <div class="detail-item">
+                        <strong>Estimated Value Range:</strong>
+                        <span id="estimatedValue">-</span>
+                    </div>
+                </div>
+
+                <div class="visible-issues" id="visibleIssuesSection" style="display: none;">
+                    <h4>Visible Issues:</h4>
+                    <ul id="visibleIssuesList"></ul>
+                </div>
+
+                <div class="recommendations">
+                    <h4>Purchase Recommendations:</h4>
+                    <ul id="recommendationsList"></ul>
+                </div>
+
+                <div class="key-considerations">
+                    <h4>Key Considerations:</h4>
+                    <ul id="keyConsiderationsList"></ul>
+                </div>
+
+                <div class="next-steps">
+                    <h4>Next Steps:</h4>
+                    <ul id="nextStepsList"></ul>
+                </div>
+
+                <div class="action-buttons">
+                    <button onclick="searchOnline()" class="primary">Search Similar Equipment Online</button>
+                    <button onclick="resetApp()" class="secondary">Analyze Another Equipment</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="loading" id="loading" style="display: none;">
+            <div class="spinner"></div>
+            <p>Analyzing equipment condition...</p>
+            <p class="loading-note" id="loadingNote"></p>
+        </div>
+
+        <div class="demo-note">
+            <p><strong>Note:</strong> The system is using <span id="apiStatus">Google Gemini AI</span> for analysis.</p>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
